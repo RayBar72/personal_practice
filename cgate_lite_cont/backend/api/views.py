@@ -45,7 +45,7 @@ class TranList(viewsets.ModelViewSet):
     def get_queryset(self):
         '''Filtering by user'''
         user = self.request.user
-        return Transactions.objects.filter(user=user).order_by('-created_tran')
+        return Transactions.objects.filter(user=user).order_by('-created_tr')
 
     def perform_create(self, serializer):
         '''Sets the user for the creation of gasstation'''

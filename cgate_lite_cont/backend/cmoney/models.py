@@ -13,8 +13,8 @@ class GasStations(models.Model):
     '''
     name = models.CharField(max_length=120)
     address = models.CharField(max_length=400)
-    created_gs = models.DateTimeField(auto_now=True)
-    updated_gs = models.DateTimeField(auto_now_add=True)
+    created_gs = models.DateTimeField(auto_now_add=True)
+    updated_gs = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -32,8 +32,8 @@ class Pump(models.Model):
     name = models.CharField(max_length=120)
     wallet_id = models.CharField(max_length=400)
     wallet_name = models.CharField(max_length=45)
-    created_pump = models.DateTimeField(auto_now=True)
-    updated_pump = models.DateTimeField(auto_now_add=True)
+    created_pump = models.DateTimeField(auto_now_add=True)
+    updated_pump = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     gas_st = models.ForeignKey('GasStations', on_delete=models.CASCADE)
 
@@ -55,16 +55,25 @@ class Transactions(models.Model):
         date_creation. datetime
         date_update. datetime
     '''
+    from .prueba import EXCHA, IDS
+
+    def amount(self, EXCHA):
+        '''Function that sets amount_cr'''
+        exchanger = EXCHA
+        amount = self.amount_uy
+        return amount / exchanger
+
     pump_id = models.ForeignKey('Pump', on_delete=models.CASCADE)
-    trans_id = models.IntegerField(default=0)
-    cripto_id = models.CharField(max_length=1024)
+    cripto_id = models.CharField(max_length=1024, default=IDS)
     amount_uy = models.FloatField(default=0)
-    exchange = models.FloatField(default=0)
-    amount_cr = models.FloatField(default=0)
-    fee_cr = models.FloatField(default=0)
+    exchange = models.FloatField(default=EXCHA)
+    mount_cr = models.FloatField(default=0)
+    our_fe = models.FloatField(default=0)
     total = models.FloatField(default=0)
-    created_tr = models.DateTimeField(auto_now=True)
-    updated_tr = models.DateTimeField(auto_now_add=True)
-    
+    created_tr = models.DateTimeField(auto_now_add=True)
+    updated_tr = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    status_tr = models.IntegerField(default=0)
+
     def __str__(self):
         return str(self.trans_id)
