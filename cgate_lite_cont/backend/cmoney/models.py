@@ -76,4 +76,4 @@ class Transactions(models.Model):
     status_tr = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.trans_id)
+        return str(self.cripto_id)

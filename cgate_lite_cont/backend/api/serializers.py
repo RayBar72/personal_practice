@@ -25,6 +25,7 @@ class PumpSeria(serializers.ModelSerializer):
         '''Serialization list'''
         model = Pump
         fields = [
+            'id',
             'name',
             'wallet_id',
             'wallet_name',
@@ -42,14 +43,16 @@ class TranSeria(serializers.ModelSerializer):
         '''Serialization list'''
         model = Transactions
         fields = [
+            'id',
             'pump_id',
-            'trans_id',
             'cripto_id',
             'amount_uy',
             'exchange',
-            'amount_cr',
-            'fee_cr',
+            'mount_cr',
+            'our_fe',
             'total',
             'created_tr',
             'updated_tr',
+            'user',
+            'status_tr',
         ]
