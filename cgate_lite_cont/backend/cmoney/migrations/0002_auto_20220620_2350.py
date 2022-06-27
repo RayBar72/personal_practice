@@ -24,6 +24,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='transactions',
             name='mount_cr',
-            field=models.FloatField(default=cmoney.models.Transactions.amount),
+            field=models.FloatField(default=0),
         ),
     ]

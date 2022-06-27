@@ -29,8 +29,8 @@ class Pump(models.Model):
         date_creation. datetime
         date_update. datetime
     '''
+    id = models.CharField(max_length=400, unique=True, null=False, primary_key=True)
     name = models.CharField(max_length=120)
-    wallet_id = models.CharField(max_length=400)
     wallet_name = models.CharField(max_length=45)
     created_pump = models.DateTimeField(auto_now_add=True)
     updated_pump = models.DateTimeField(auto_now=True)
@@ -55,18 +55,20 @@ class Transactions(models.Model):
         date_creation. datetime
         date_update. datetime
     '''
-    from .prueba import EXCHA, IDS
+    # from .prueba import EXCHA, IDS
 
-    def amount(self, EXCHA):
-        '''Function that sets amount_cr'''
-        exchanger = EXCHA
-        amount = self.amount_uy
-        return amount / exchanger
+    # def amount(self, EXCHA):
+    #     '''Function that sets amount_cr'''
+    #     exchanger = EXCHA
+    #     amount = self.amount_uy
+    #     return amount / exchanger
 
     pump_id = models.ForeignKey('Pump', on_delete=models.CASCADE)
-    cripto_id = models.CharField(max_length=1024, default=IDS)
+    cripto_id = models.CharField(max_length=1024, default=0)
+    fuel = models.CharField(max_length=300, blank=True, null=True)
+    liters = models.FloatField(default=0)
     amount_uy = models.FloatField(default=0)
-    exchange = models.FloatField(default=EXCHA)
+    exchange = models.FloatField(default=0)
     mount_cr = models.FloatField(default=0)
     our_fe = models.FloatField(default=0)
     total = models.FloatField(default=0)
