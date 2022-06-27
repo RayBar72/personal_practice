@@ -57,3 +57,29 @@ class TranSeria(serializers.ModelSerializer):
             'user',
             'status_tr',
         ]
+
+
+class TrInSeria(serializers.ModelSerializer):
+    '''Class that seraialize Beggining of transaccion'''
+
+    class Meta:
+        '''Serialization list'''
+        model = Transactions
+        fields = [
+            'id',
+            'pump_id',
+            'cripto_id',
+            'fuel',
+            'liters',
+            'amount_uy',
+            'exchange',
+            'mount_cr',
+            'our_fe',
+            'total',
+            'created_tr',
+            'updated_tr',
+            'user',
+            'status_tr',
+        ]
+
+

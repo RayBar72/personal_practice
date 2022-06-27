@@ -1,6 +1,6 @@
 '''Generates api views'''
 from rest_framework import viewsets, permissions
-from .serializers import GasSeria, Pump, PumpSeria, TranSeria
+from .serializers import GasSeria, Pump, PumpSeria, TranSeria, TrInSeria
 from cmoney.models import GasStations, Pump, Transactions
 
 
@@ -45,8 +45,26 @@ class TranList(viewsets.ModelViewSet):
     def get_queryset(self):
         '''Filtering by user'''
         user = self.request.user
-        return Transactions.objects.filter(user=user).order_by('-created_tr')
+        return Transactions.objects.filter(user=user).order_by('-updated_tr')
 
     def perform_create(self, serializer):
         '''Sets the user for the creation of gasstation'''
         serializer.save(user=self.request.user)
+
+
+class TrInList(viewsets.ModelViewSet):
+    '''Gas JSON generator'''
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Transactions.objects.all()
+    serializer_class = TrInSeria
+
+    def get_queryset(self):
+        '''Filtering by user'''
+        user = self.request.user
+        return Transactions.objects.filter(user=user).order_by('-updated_tr')
+
+    def perform_create(self, request, serializer):
+        '''Sets the user for the creation of gasstation'''
+        if request.method == 'POST':
+            
+        # serializer.save(user=self.request.user)
