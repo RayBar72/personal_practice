@@ -65,3 +65,4 @@ class NeuralNetwork():
         c = self.cost(Y, a)
         return evaluate, c
 
+    
